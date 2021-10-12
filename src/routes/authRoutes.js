@@ -7,9 +7,9 @@ const router = express.Router();
 
 router.post("/signup", async (req, res) => {
   const { phone, password } = req.body;
-  const regex = /^(\+98|0098|98|0)?9\d{9}$/;
-  if (!regex.test(phone))
-    return res.status(402).send({ error: "Invalid phone" });
+  //const regex = /^(\+98|0098|98|0)?9\d{9}$/;
+  //if (!regex.test(phone))
+//    return res.status(402).send({ error: "Invalid phone" });
 
   try {
     const user = new User({ phone, password });
