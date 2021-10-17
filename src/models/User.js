@@ -11,17 +11,14 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  //   isManager: {
-  //     type: Boolean,
-  //     required: true,
-  //   },
-  //   name: {
-  //     type: String,
-  //   },
-  //   unit: {
-  //     type: mongoose.Schema.Types.ObjectId,
-  //     ref: "Unit",
-  //   },
+  isManager: {
+    type: Boolean,
+    required: true,
+    default: true,
+  },
+  name: {
+    type: String,
+  },
 });
 
 userSchema.pre("save", function (next) {

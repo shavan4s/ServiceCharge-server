@@ -9,10 +9,10 @@ const router = express.Router();
 router.use(requireAuth);
 
 router.get("/buildings", async (req, res) => {
-  //const buildings = await Building.find({ user: req.user._id });
-  const buildings = await Building.find({ user: req.user._id }).populate(
-    "User"
-  );
+  const buildings = await Building.find({ userId: req.user._id });
+  // const buildings = await Building.find({ user: req.user._id }).populate(
+  //   "User"
+  // );
   res.send(buildings);
 });
 
@@ -22,15 +22,12 @@ router.post("/buildings", async (req, res) => {
   if (!name || !shebaNumber || !shebaOwner) {
     return res.status(422).send({ error: "You must fill all forms!" });
   }
-
   try {
     const building = new Building({
       name,
       shebaNumber,
       shebaOwner,
-      user: req.user._id,
-      userPhone: req.user.phone,
-      managerName: req.user.managerName,
+      userId: req.user._id,
     });
     await building.save();
     res.send(building);

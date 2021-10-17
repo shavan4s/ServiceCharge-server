@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const buildingSchema = new mongoose.Schema({
-  user: {
+  userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
   },
@@ -10,7 +10,7 @@ const buildingSchema = new mongoose.Schema({
     required: true,
   },
   shebaNumber: {
-    type: Number,
+    type: String,
     required: true,
   },
   shebaOwner: {
