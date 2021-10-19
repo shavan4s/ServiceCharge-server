@@ -7,9 +7,12 @@ const router = express.Router();
 
 router.post("/signup", async (req, res) => {
   const { phone, password } = req.body;
-  //const regex = /^(\+98|0098|98|0)?9\d{9}$/;
-  //if (!regex.test(phone))
-//    return res.status(402).send({ error: "Invalid phone" });
+  const phoneRegex = /^(\+98|0098|98|0)?9\d{9}$/;
+  if (!phoneRegex.test(phone))
+    return res.status(402).send({ error: "Invalid phone" });
+  const passRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
+  if (!passRegex.test(password))
+    return res.status(402).send({ error: "Invalid password" });
 
   try {
     const user = new User({ phone, password });
