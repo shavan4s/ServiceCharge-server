@@ -14,7 +14,8 @@ const unitSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  debit: [costsSchema],
+  debit: {[costsSchema],
+  default: [],}
 });
 
 mongoose.model("Unit", unitSchema);
