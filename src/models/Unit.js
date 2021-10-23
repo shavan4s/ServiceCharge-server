@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
 
 const costsSchema = new mongoose.Schema({
-  title: String,
-  timestamp: Number,
-  cost: Number,
+  title: { type: String, default: "" },
+  timestamp: { type: String, default: "" },
+  cost: { type: Number, default: 0 },
 });
 const unitSchema = new mongoose.Schema({
   building: {
@@ -14,8 +14,7 @@ const unitSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  debit: {[costsSchema],
-  default: [],}
+  debit: [costsSchema],
 });
 
 mongoose.model("Unit", unitSchema);
