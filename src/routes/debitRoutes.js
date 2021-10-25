@@ -24,7 +24,7 @@ router.post("/units", async (req, res) => {
   }
 
   try {
-    const debit = new Unit({
+    const debit = new Debit({
       title,
       timestamp,
       cost,
