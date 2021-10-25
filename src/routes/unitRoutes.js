@@ -26,7 +26,6 @@ router.post("/units", async (req, res) => {
   try {
     const unit = new Unit({
       name,
-      debit,
       building,
     });
     await unit.save();
