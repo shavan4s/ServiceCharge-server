@@ -2,35 +2,35 @@ const express = require("express");
 const mongoose = require("mongoose");
 const requireAuth = require("../middlewares/requireAuth");
 
+const Unit = mongoose.model("Debit");
 const Unit = mongoose.model("Unit");
-const Building = mongoose.model("Building");
 
 const router = express.Router();
 
 router.use(requireAuth);
 
-router.get("/units", async (req, res) => {
-  const units = await Unit.find({ building: req.building._id });
+router.get("/debits", async (req, res) => {
+  const debits = await Debit.find({ debits: req.debits._id });
 
-  res.send(units);
+  res.send(debits);
 });
 
 router.post("/units", async (req, res) => {
-  const { name, building } = req.body;
-  const b = await Building.findById(building);
+  const { name, unit } = req.body;
+  const b = await Unit.findById(unit);
 
   if (!name) {
     return res.status(422).send({ error: "You must fill all forms!" });
   }
 
   try {
-    const unit = new Unit({
+    const debit = new Unit({
       name,
       debit,
-      building: b._id,
+      unit: u._id,
     });
     await unit.save();
-    res.send(unit);
+    res.send(debit);
   } catch (err) {
     res.status(422).send({ error: err.message });
   }
