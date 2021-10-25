@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const requireAuth = require("../middlewares/requireAuth");
 
-const Unit = mongoose.model("Debit");
+const Debit = mongoose.model("Debit");
 const Unit = mongoose.model("Unit");
 
 const router = express.Router();
@@ -10,7 +10,7 @@ const router = express.Router();
 router.use(requireAuth);
 
 router.get("/debits", async (req, res) => {
-  const debits = await Debit.find({ debits: req.debits._id });
+  const debits = await Debit.find({ debits: req.debit._id });
 
   res.send(debits);
 });
