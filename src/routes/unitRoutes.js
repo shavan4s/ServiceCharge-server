@@ -19,7 +19,7 @@ router.post("/units", async (req, res) => {
   const { name, debit, building } = req.body;
   const b = await Building.findById(building);
 
-  if (!name || !debit) {
+  if (!name) {
     return res.status(422).send({ error: "You must fill all forms!" });
   }
 
