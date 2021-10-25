@@ -16,18 +16,19 @@ router.get("/debits", async (req, res) => {
 });
 
 router.post("/units", async (req, res) => {
-  const { name, unit } = req.body;
-  const b = await Unit.findById(unit);
+  const { title, timestamp, cost, unit } = req.body;
+  const u = await Unit.findById(unit);
 
-  if (!name) {
+  if ((!title, !cost)) {
     return res.status(422).send({ error: "You must fill all forms!" });
   }
 
   try {
     const debit = new Unit({
-      name,
-      debit,
-      unit: u._id,
+      title,
+      timestamp,
+      cost,
+      unit,
     });
     await unit.save();
     res.send(debit);
