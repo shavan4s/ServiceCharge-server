@@ -10,7 +10,7 @@ const router = express.Router();
 router.use(requireAuth);
 
 router.get("/debits", async (req, res) => {
-  const debits = await Debit.find({ debits: req.debit._id });
+  const debits = await Debit.find({ debits: req.unit._id });
 
   res.send(debits);
 });
