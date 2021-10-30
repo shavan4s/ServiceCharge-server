@@ -9,8 +9,8 @@ const router = express.Router();
 
 router.use(requireAuth);
 
-router.get("/units", async (req, res) => {
-  const units = await Unit.find({ building: req.building._id });
+router.get("/units/:building", async (req, res) => {
+  const units = await Unit.find({ building: req.building });
 
   res.send(units);
 });
