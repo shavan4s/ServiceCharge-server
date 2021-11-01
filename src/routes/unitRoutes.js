@@ -3,7 +3,6 @@ const mongoose = require("mongoose");
 const requireAuth = require("../middlewares/requireAuth");
 
 const Unit = mongoose.model("Unit");
-const Building = mongoose.model("Building");
 
 const router = express.Router();
 
@@ -17,7 +16,6 @@ router.get("/units/:building", async (req, res) => {
 
 router.post("/units", async (req, res) => {
   const { name, building } = req.body;
-  const b = await Building.findById(building);
 
   if (!name) {
     return res.status(422).send({ error: "You must fill all forms!" });
