@@ -14,7 +14,7 @@ router.get("/debits/:unit", async (req, res) => {
   res.send(debits);
 });
 
-router.post("/units", async (req, res) => {
+router.post("/debits", async (req, res) => {
   const { title, timestamp, cost, unit } = req.body;
 
   if ((!title, !cost)) {
@@ -28,7 +28,7 @@ router.post("/units", async (req, res) => {
       cost,
       unit,
     });
-    await unit.save();
+    await debit.save();
     res.send(debit);
   } catch (err) {
     res.status(422).send({ error: err.message });

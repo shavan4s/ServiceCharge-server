@@ -7,7 +7,7 @@ const debitSchema = new mongoose.Schema({
   },
   title: String,
   timestamp: String,
-  cost: Number,
+  cost: String,
   isPayed: { type: Boolean, default: false },
 });
 
