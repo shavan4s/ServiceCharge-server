@@ -6,7 +6,7 @@ const User = mongoose.model("User");
 const router = express.Router();
 
 router.post("/signup", async (req, res) => {
-  const { phone, password } = req.body;
+  const { phone, password, isManager, unit, name } = req.body;
   const phoneRegex = /^(\+98|0098|98|0)?9\d{9}$/;
   if (!phoneRegex.test(phone))
     return res.status(402).send({ error: "Invalid phone" });
@@ -15,7 +15,7 @@ router.post("/signup", async (req, res) => {
     return res.status(402).send({ error: "Invalid password" });
 
   try {
-    const user = new User({ phone, password });
+    const user = new User({ phone, password, isManager, unit, name });
     await user.save();
 
     const token = jwt.sign({ userId: user._id }, "MY_SECRET_KEY");
