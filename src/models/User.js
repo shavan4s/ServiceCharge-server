@@ -19,6 +19,11 @@ const userSchema = new mongoose.Schema({
   name: {
     type: String,
   },
+  unit: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "unit",
+    default: null,
+  },
 });
 
 userSchema.pre("save", function (next) {
