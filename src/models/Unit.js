@@ -9,6 +9,10 @@ const unitSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  hasOccupant: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 mongoose.model("Unit", unitSchema);
