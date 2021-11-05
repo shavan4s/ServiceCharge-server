@@ -36,4 +36,27 @@ router.post("/buildings", async (req, res) => {
   }
 });
 
+router.put("/buildings/:id", async (req, res) => {
+  const { name, shebaNumber, shebaOwner } = req.body;
+  if (!name || !shebaNumber || !shebaOwner) {
+    return res.status(422).send({ error: "You must fill all forms!" });
+  }
+  const building = await Building.findById(req.params.id);
+  try {
+    building.name = name;
+    building.shebaNumber = shebaNumber;
+    building.shebaOwner = shebaOwner;
+    await building.save();
+    res.send(building);
+  } catch (error) {
+    res.status(422).send({ error: err.message });
+  }
+});
+
+router.delete("/buildings/:id", async (req, res) => {
+  Building.deleteOne({ _id: req.params.id }, function (err, Building) {
+    res.send(Building);
+  });
+});
+
 module.exports = router;
