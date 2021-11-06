@@ -15,7 +15,7 @@ router.get("/units/:building", async (req, res) => {
 });
 
 router.post("/units", async (req, res) => {
-  const { name, building, hasOccupant } = req.body;
+  const { name, building } = req.body;
 
   if (!name) {
     return res.status(422).send({ error: "You must fill all forms!" });
@@ -25,7 +25,6 @@ router.post("/units", async (req, res) => {
     const unit = new Unit({
       name,
       building,
-      hasOccupant,
     });
     await unit.save();
     res.send(unit);
