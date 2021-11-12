@@ -46,4 +46,10 @@ router.post("/signin", async (req, res) => {
   }
 });
 
+router.get("/users/:unit", async (req, res) => {
+  const user = await User.find({ unit: req.params.unit });
+
+  res.send(user);
+});
+
 module.exports = router;
