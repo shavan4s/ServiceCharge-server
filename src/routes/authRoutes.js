@@ -48,8 +48,28 @@ router.post("/signin", async (req, res) => {
 
 router.get("/users/:unit", async (req, res) => {
   const user = await User.find({ unit: req.params.unit });
-
   res.send(user);
 });
-
+router.put("/users/:_id", async (req, res) => {
+  const { phone, password } = req.body;
+  const phoneRegex = /^(\+98|0098|98|0)?9\d{9}$/;
+  if (!phoneRegex.test(phone))
+    return res.status(402).send({ error: "Invalid phone" });
+  const passRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
+  if (!passRegex.test(password))
+    return res.status(402).send({ error: "Invalid password" });
+  try {
+    const user = await User.findById({ _id: req.params._id });
+    try {
+      user.phone = phone;
+      user.password = password;
+      await user.save();
+      res.send(user);
+    } catch (err) {
+      res.status(422).send({ error: err.message });
+    }
+  } catch (err) {
+    return res.status(422).send(err.message);
+  }
+});
 module.exports = router;
